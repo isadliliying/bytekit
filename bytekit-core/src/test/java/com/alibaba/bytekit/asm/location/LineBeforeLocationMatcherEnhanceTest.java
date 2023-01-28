@@ -41,8 +41,16 @@ public class LineBeforeLocationMatcherEnhanceTest {
     }
 
 
+    /**
+     * 使用了Binding.LocalVars增强时，会报错
+     * 反编译可以看到报了：Invisible function parameters on a non-constructor (or reads of uninitialised local variables).
+     * 直接进行Retransform时，也会报错.
+     * 源码是：/bytekit-core/src/test/resources/TestManager.kt
+     * class文件是：/bytekit-core/src/test/resources/TestManager.class
+     * 编译用的是 kotlin 1.4
+     */
     @Test
-    public void testMatched() throws Exception {
+    public void testLocalVarsEnhanceError() throws Exception {
 
         LineBeforeLocationMatcher locationMatcher = new LineBeforeLocationMatcher(7);
         Method method = ReflectionUtils.findMethod(SpyLookInterceptor.class, "atLineBefore", null);
