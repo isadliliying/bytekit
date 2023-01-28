@@ -1,3 +1,5 @@
+package com.seewo.study.ability.base.manager
+
 class TestManager {
 
     fun testKotlinMap() {
