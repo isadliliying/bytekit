@@ -55,6 +55,11 @@ public abstract class Location {
         throw new IllegalStateException("enableFilteredMark is false. filtered is not useful. please check!");
     }
 
+    public void enableAndSetFiltered(boolean filtered){
+        this.enableFilteredMark = true;
+        this.filtered = filtered;
+    }
+
     public boolean isEnableFilteredMark() {
         return enableFilteredMark;
     }

@@ -111,10 +111,11 @@ public abstract class Binding {
         boolean optional() default false;
 
     }
+
     public static class LocalVarNamesBindingParser implements BindingParser {
         @Override
         public Binding parse(Annotation annotation) {
-            if (annotation instanceof LocalVarNames){
+            if (annotation instanceof LocalVarNames) {
                 LocalVarNames localVarNames = (LocalVarNames) annotation;
                 return new LocalVarNamesBinding(localVarNames.excludePattern());
             }
@@ -427,6 +428,24 @@ public abstract class Binding {
         @Override
         public Binding parse(Annotation annotation) {
             return new LineBeforeBinding();
+        }
+    }
+
+    @Documented
+    @Retention(RetentionPolicy.RUNTIME)
+    @java.lang.annotation.Target(ElementType.PARAMETER)
+    @BindingParserHandler(parser = StringBindingParser.class)
+    public static @interface StringValue {
+
+        String value() default "";
+
+    }
+
+    public static class StringBindingParser implements BindingParser {
+        @Override
+        public Binding parse(Annotation annotation) {
+            StringValue stringValue = (StringValue) annotation;
+            return new StringBinding(stringValue.value());
         }
     }
 
